@@ -28,7 +28,9 @@ export class TarefaService {
   }
 
   findOne(id: number) {
+    console.log(this.tarefas);
     let t = this.tarefas.find(x => x.id === id );
+    console.log("Buscando o elemento: " +t.tituloTarefa);
     return t;
   }
 
