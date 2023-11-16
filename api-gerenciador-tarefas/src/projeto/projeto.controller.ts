@@ -1,16 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { ProjetoService } from './projeto.service';
 import { CreateProjetoDto } from './dto/create-projeto.dto';
 import { UpdateProjetoDto } from './dto/update-projeto.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('projetos')
 export class ProjetoController {
   constructor(private readonly projetoService: ProjetoService) {}
 
+
   @Post()
   create(@Body() createProjetoDto: CreateProjetoDto) {
     return this.projetoService.create(createProjetoDto);
   }
+
 
   @Get()
   findAll() {
@@ -22,15 +25,18 @@ export class ProjetoController {
     return this.projetoService.findOne(+id);
   }
 
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateProjetoDto: UpdateProjetoDto) {
     return this.projetoService.update(+id, updateProjetoDto);
   }
 
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.projetoService.remove(+id);
   }
+
 
   @Delete()
   removeAll(){

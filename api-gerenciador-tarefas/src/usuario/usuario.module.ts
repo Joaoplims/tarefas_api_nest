@@ -7,5 +7,6 @@ import { ProjetoModule } from 'src/projeto/projeto.module';
   imports: [ProjetoModule],
   controllers: [UsuarioController],
   providers: [UsuarioService],
+  exports:[UsuarioService],
 })
 export class UsuarioModule {}

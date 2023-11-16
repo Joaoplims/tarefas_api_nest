@@ -6,10 +6,18 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuarioService {
-  private usuarios : Usuario[] = [];
+  private usuarios : Usuario[] = []
   private lastId : number = 0;
 
-  constructor(private projetoService : ProjetoService){}
+  constructor(private projetoService : ProjetoService){
+      let master = new Usuario();
+      master.id = 1;
+      master.nome = 'admin';
+      master.senha = 'admin'
+      this.usuarios.push(master);
+      console.log(">>> Usuario Master adicionado");
+     
+  }
 
   create(createUsuarioDto: CreateUsuarioDto) {
     let u = new Usuario();
@@ -28,6 +36,9 @@ export class UsuarioService {
 
   findOne(id: number) {
     return this.usuarios.find(u => u.id === id );
+  }
+ findByName(username : string){
+    return this.usuarios.find(n => n.nome === username);
   }
 
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
